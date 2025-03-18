@@ -1,9 +1,32 @@
 import { StyleSheet, View, Image ,TouchableOpacity,Text, TextInput} from 'react-native';
-import { ThemedView } from '@/components/ThemedView';
-import React, { useState } from 'react';
+import React, { useState ,useRef} from 'react';
+
 
 
 export default function Login(){
+  const numInputs = 6; // Número total de campos OTP
+
+  const [otp, setOtp] = useState(Array(numInputs).fill(""));
+  const inputsRef = useRef<TextInput[]>([]);
+  const handleChange = (text: string, index: number) => {
+    if (/^\d$/.test(text)) { // Se for um número entre 0 e 9
+      const newOtp = [...otp];
+      newOtp[index] = text;
+      setOtp(newOtp);
+  
+      // Passa para o próximo campo se não for o último
+      if (index < numInputs - 1) {
+        inputsRef.current[index + 1]?.focus();
+      }
+    } else if (text === "") {
+      // Se apagar, move para o campo anterior
+      const newOtp = [...otp];
+      newOtp[index] = "";
+      setOtp(newOtp);
+      
+    }
+  };
+  
 return(
     <View  style={[styles.container]}>
         <Image 
@@ -22,13 +45,49 @@ return(
         <Text style={{justifyContent:'center',fontSize:15}}>Enviamos um código,
         por favor verifique a sua caixa de sms</Text>
         <View  style={styles.row}>
-        <TextInput style={styles.input} />
-        <TextInput style={styles.input} />
-        <TextInput style={styles.input} />
+        <TextInput
+          ref={(ref) => (inputsRef.current[0] = ref!)}
+          style={styles.input}
+          keyboardType="numeric"
+          maxLength={1}
+          onChangeText={(text) => handleChange(text, 0)}
+        />
+        <TextInput
+          ref={(ref) => (inputsRef.current[1] = ref!)}
+          style={styles.input}
+          keyboardType="numeric"
+          maxLength={1}
+          onChangeText={(text) => handleChange(text, 1)}
+        />
+        <TextInput
+          ref={(ref) => (inputsRef.current[2] = ref!)}
+          style={styles.input}
+          keyboardType="numeric"
+          maxLength={1}
+          onChangeText={(text) => handleChange(text, 2)}
+        />
         <View style={styles.squareSeparador} />
-        <TextInput style={styles.input} />
-        <TextInput style={styles.input} />
-        <TextInput style={styles.input} />
+        <TextInput
+          ref={(ref) => (inputsRef.current[3] = ref!)}
+          style={styles.input}
+          keyboardType="numeric"
+          maxLength={1}
+          onChangeText={(text) => handleChange(text, 3)}
+        />
+        <TextInput
+          ref={(ref) => (inputsRef.current[4] = ref!)}
+          style={styles.input}
+          keyboardType="numeric"
+          maxLength={1}
+          onChangeText={(text) => handleChange(text, 4)}
+        />
+        <TextInput
+          ref={(ref) => (inputsRef.current[5] = ref!)}
+          style={styles.input}
+          keyboardType="numeric"
+          maxLength={1}
+          onChangeText={(text) => handleChange(text, 5)}
+        />
        
       </View>
       <Text style={{position:'absolute',top:470,color:'#87888B'}}>Enviar outro em:0:59</Text>

@@ -1,9 +1,17 @@
-import { StyleSheet, View, Image ,TouchableOpacity,Text, TextInput} from 'react-native';
+import { StyleSheet, View, Image ,TouchableOpacity,Text, TextInput,Alert} from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
-import { opacity } from 'react-native-reanimated/lib/typescript/Colors';
+import { useRouter } from "expo-router";
 
 
 export default function Login(){
+  const router=useRouter();
+  const navegacao = () => {
+    Alert.alert("Verifique a sua caixa de SMS", "", [
+      { text: "OK", onPress: () => router.push("/codigoOTP") }, 
+    ]);
+  };
+
+  
 return(
     <View  style={[styles.container]}>
         <Image 
@@ -23,7 +31,7 @@ return(
       placeholderTextColor="#000">  
       </TextInput >
 <TouchableOpacity style={styles.bottom}
-onPress={()=>alert("Verifique a sua caixa de Mensagem")}>
+onPress={navegacao}>
     <Text style={[styles.bottomText]}>Gerar Código OTP</Text>
   
 </TouchableOpacity>
