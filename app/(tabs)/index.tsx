@@ -1,74 +1,58 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
+import { StyleSheet, View, Image } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <View style={styles.container}>
+      <ThemedView>
+        
+        <Image 
+          source={require('@/assets/images/logotipo1.jpg')} 
+          style={styles.image} 
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      <View  style={styles.row}>
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+        <View style={styles.circle} />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1, 
+    backgroundColor: '#fff', // Define o fundo da tela inteira
+    justifyContent: 'center', // Centraliza os itens verticalmente
+    alignItems: 'center' // Centraliza os itens horizontalmente
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  image: {
+    marginTop:0,
+    width: 400, 
+    height: 200
+  }, 
+   row: {
+    position: 'absolute', 
+    top: '90%',
+    flexDirection: 'row', // Circulos lado a lado
+    justifyContent: 'center', // Centralização dos Elementos
+    alignItems: 'center', // Alinha os itens ao centro
+    gap: 20, // Espaço entre os círculos 
+    marginBottom: -180
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  circle: {
+    width: 15,
+    height: 15,
+    backgroundColor: 'white',
+    borderRadius: 50, // Metade da largura/altura para um círculo perfeito
+    marginBottom: 1,
+    borderStyle:'solid' ,
+    borderColor:'black',
+    borderWidth:2,
+   
   },
 });
+
