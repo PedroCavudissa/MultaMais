@@ -1,43 +1,13 @@
 import React,{useState} from 'react'
 import { StyleSheet, View, Image,Alert,Button } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
-import * as ImagePicker from "expo-image-picker";
 
 export default function HomeScreen() {
 
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const pickImage = async () => {
-    // Pedir permissão
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert("Permissão negada", "Você precisa permitir o acesso à galeria.");
-      return;
-    }
-
-    // Abrir a galeria
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    // Se o usuário escolheu uma imagem, atualiza o estado
-    if (result.assets && result.assets.length > 0) {
-      setSelectedImage(result.assets[0].uri);
-    }
-    
-  };
-
+  
   return (
     <View style={styles.container}>
-      <Button title="Abrir Galeria" onPress={pickImage} />
-      {selectedImage && (
-        <Image
-          source={{ uri: selectedImage }}
-          style={{ width: 200, height: 200, marginTop: 20 }}
-        />
-      )}
+   
       <ThemedView>
         
         <Image 
